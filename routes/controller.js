@@ -74,26 +74,10 @@ let updateUser = async (req, res, next) => {
 	}
 };
 
-let deleteUser = async (req, res, next) => {
-	try {
-		const id = req.params.userId;
-		const deletedata = await users.findOneAndDelete({ id: id });
-		console.log(deletedata);
-		if (!id) {
-			return res.status(404).send(error);
-		} else {
-			res.send(deletedata);
-		}
-	} catch (error) {
-		res.status(404).send(error);
-	}
-};
-
 module.exports = {
 	begin,
 	CreateUser,
 	listAllUsers,
 	listOneUser,
 	updateUser,
-	deleteUser,
 };
