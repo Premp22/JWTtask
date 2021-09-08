@@ -7,7 +7,7 @@ const users = require("../db/schema");
 let begin = (req, res, next) => {
 	res.render("index", { title: "express" });
 };
-let CreateUser = (req, res, next) => {
+let createUser = (req, res, next) => {
 	const user = new users({
 		id: req.body.id,
 		firstname: req.body.firstname,
@@ -54,12 +54,8 @@ let updateUser = async (req, res, next) => {
 		const id = req.params.userId;
 		const updatedata = await users.findOneAndUpdate(
 			{ id: id },
-			{
-				firstname: req.body.firstname,
-				lastname: req.body.lastname,
-				email: req.body.email,
-				password: req.body.password,
-			},
+			req.body,
+
 			{
 				new: true,
 			}
@@ -82,7 +78,7 @@ let deleteUser = async (req, res, next) => {
 		if (!id) {
 			return res.status(404).send(error);
 		} else {
-			res.send(deletedata);
+			res.send(`The deleted id is ${id}`);
 		}
 	} catch (error) {
 		res.status(404).send(error);
@@ -90,7 +86,7 @@ let deleteUser = async (req, res, next) => {
 };
 module.exports = {
 	begin,
-	CreateUser,
+	createUser,
 	listAllUsers,
 	listOneUser,
 	updateUser,

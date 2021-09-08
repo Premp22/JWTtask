@@ -5,7 +5,7 @@ const controller = require("./controller");
 
 /* GET users listing. */
 router.get("/", controller.begin);
-router.post("/users", controller.CreateUser);
+router.post("/users", controller.createUser);
 router.get("/users", controller.listAllUsers);
 router.get("/users/:userId", controller.listOneUser);
 router.patch("/users/:userId", controller.updateUser);
