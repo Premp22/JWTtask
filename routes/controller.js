@@ -15,6 +15,7 @@ let CreateUser = (req, res, next) => {
 		email: req.body.email,
 		password: req.body.password,
 	});
+	console.log(req.body);
 	user
 		.save()
 		.then(() => {
