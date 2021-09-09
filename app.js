@@ -4,10 +4,10 @@ var path = require("path");
 var approute = require("./routes/index");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-require("./db/conn");
-require("./db/schema");
-var app = express();
 
+const { initMongo } = require("./models/connection");
+var app = express();
+initMongo();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");

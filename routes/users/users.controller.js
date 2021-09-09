@@ -2,11 +2,10 @@ const { error } = require("console");
 var express = require("express");
 var path = require("path");
 var router = express.Router();
-const users = require("../../db/schema");
-
+const User = require("../../models/user.model");
 
 let createUser = (req, res, next) => {
-	const user = new users({
+	const user = new User({
 		id: req.body.id,
 		firstname: req.body.firstname,
 		lastname: req.body.lastname,
@@ -26,7 +25,7 @@ let createUser = (req, res, next) => {
 
 let listAllUsers = async (req, res, next) => {
 	try {
-		const usersdata = await users.find();
+		const usersdata = await User.find();
 		res.send(usersdata);
 	} catch (error) {
 		res.send(error);
@@ -35,7 +34,7 @@ let listAllUsers = async (req, res, next) => {
 let listOneUser = async (req, res, next) => {
 	try {
 		const id = req.params.userId;
-		const usersdata = await users.findOne({ id: id });
+		const usersdata = await User.findOne({ id: id });
 
 		if (!usersdata) {
 			return res.status(404).send();
@@ -50,7 +49,7 @@ let listOneUser = async (req, res, next) => {
 let updateUser = async (req, res, next) => {
 	try {
 		const id = req.params.userId;
-		const updatedata = await users.findOneAndUpdate(
+		const updatedata = await User.findOneAndUpdate(
 			{ id: id },
 			req.body,
 
@@ -71,7 +70,7 @@ let updateUser = async (req, res, next) => {
 let deleteUser = async (req, res, next) => {
 	try {
 		const id = req.params.userId;
-		const deletedata = await users.findOneAndDelete({ id: id });
+		const deletedata = await User.findOneAndDelete({ id: id });
 		console.log(deletedata);
 		if (!id) {
 			return res.status(404).send(error);
@@ -83,7 +82,6 @@ let deleteUser = async (req, res, next) => {
 	}
 };
 module.exports = {
-	begin,
 	createUser,
 	listAllUsers,
 	listOneUser,
