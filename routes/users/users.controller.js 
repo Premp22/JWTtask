@@ -2,7 +2,7 @@ const { error } = require("console");
 var express = require("express");
 var path = require("path");
 var router = express.Router();
-const users = require("../db/schema");
+const users = require("../../db/schema");
 
 let begin = (req, res, next) => {
 	res.render("index", { title: "express" });
