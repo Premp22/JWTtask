@@ -4,9 +4,7 @@ var path = require("path");
 var router = express.Router();
 const users = require("../../db/schema");
 
-let begin = (req, res, next) => {
-	res.render("index", { title: "express" });
-};
+
 let createUser = (req, res, next) => {
 	const user = new users({
 		id: req.body.id,
